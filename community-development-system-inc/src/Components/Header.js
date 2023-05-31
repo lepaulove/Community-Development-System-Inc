@@ -16,7 +16,7 @@ function Header() {
 
   return (
     <ThemeProvider theme={theme}>
-        <AppBar position='static' sx={{ alignItems:'center', justifyContent:'space-between', width:'100%', marginBottom:{md:10, xs:5}, boxShadow:{md: '10px 10px 0px -1px #800020', xs:'0px 0px 0px -1px #800020'}}}>
+        <AppBar position='static' sx={{ alignItems:'center', justifyContent:'space-between', width:'100%', marginBottom:{md:10, xs:5}, boxShadow:{md: '5px 5px 0px -1px #FFF', xs:'0px 0px 0px -1px #800020'}}}>
             <Container maxWidth='xxl'>
                 <Toolbar disableGutters>
                     <FullAppBar />

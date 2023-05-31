@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import WaveLine from '../Components/WaveLine'
-import { Box, Button, Divider, Grid, IconButton, InputBase, Paper, Typography } from '@mui/material'
-import accredited from '../Media/aspire-seal.png'
+import { Box, Button, Card, Divider, Grid, IconButton, InputBase, Paper, Typography } from '@mui/material'
+import accredited from '../Media/aspire-seal-removebg-preview.png'
 import startImage from '../Media/start.jpg'
 import familyHug from '../Media/family-hug.JPG'
 import diverseTherapy from '../Media/diverse-therapy2.JPG'
@@ -9,7 +9,7 @@ import individual from '../Media/indv-ther.PNG'
 import group from '../Media/group-ther.PNG'
 import family from '../Media/fam-ther.PNG'
 import medMan from '../Media/med-man.PNG'
-import computerLady from '../Media/ComputerLady.JPG'
+import computerLady from '../Media/ComputerLady-removebg-preview.png'
 import { motion } from 'framer-motion'
 import GroupsIcon from '@mui/icons-material/Groups'
 import AccessTimeIcon from '@mui/icons-material/AccessTime'
@@ -185,13 +185,15 @@ function Home() {
                 transition={{duration: 2}}
                 src={familyHug} style={{objectFit:'cover', width:'50%', minHeight:'50%', borderRadius:10, backgroundColor:'#2F3345', padding:3}}/>
             </Grid>
-            <Box sx={{width:'100%', px:{md:10, xs:3}}}><Divider textAlign='center' sx={{height:'3px', width:'100%', backgroundColor:'#800020', opacity:.70}} /></Box>
-            <Grid ref={ref} item container sx={{backgroundColor:'#EEF1FC', height:300, justifyContent:'space-around', alignItems:'center', mt:8}}>
-                <Grid item md={3} xs={6}><motion.div ref={ref} initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><GroupsIcon fontSize='large' color='inherit'/> 250+</Typography><Typography color='inherit'>PATIENTS</Typography></motion.div></Grid>
-                <Grid item md={3} xs={6}><motion.div ref={ref} initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><AccessTimeIcon fontSize='large' color='inherit'/> 5k+</Typography><Typography color='inherit'>HOURS INVESTED</Typography></motion.div></Grid>
-                <Grid item md={3} xs={6}><motion.div ref={ref} initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><VolunteerActivismIcon fontSize='large' color='inherit'/> 40+</Typography><Typography color='inherit'>HEALED HEARTS</Typography></motion.div></Grid>
-                <Grid item md={3} xs={6}><motion.div ref={ref} initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><MoneyOffIcon fontSize='large' color='inherit'/> 100+</Typography><Typography color='inherit'>H PRO-BONO</Typography></motion.div></Grid>
-            </Grid>
+            <motion.div style={{width:'100%'}} initial={{width:0}} animate={{width:'100%'}} transition={{duration:2}}><Divider textAlign='center' sx={{height:'3px', width:'100%', backgroundColor:'#800020', opacity:.70}} /></motion.div>
+            <Card ref={ref} sx={{backgroundColor:'#EEF1FC', height:300, justifyContent:'space-around', mt:8, alignItems:'center', width:'100%'}}>
+                    <Grid  item container borderRadius={2} sx={{backgroundColor:'#EEF1FC', height:300, justifyContent:'space-around', alignItems:'center'}}>
+                        <Grid item md={3} xs={6}><motion.div ref={ref} initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><GroupsIcon fontSize='large' color='inherit'/> 250+</Typography><Typography color='inherit'>PATIENTS</Typography></motion.div></Grid>
+                        <Grid item md={3} xs={6}><motion.div initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><AccessTimeIcon fontSize='large' color='inherit'/> 5k+</Typography><Typography color='inherit'>HOURS INVESTED</Typography></motion.div></Grid>
+                        <Grid item md={3} xs={6}><motion.div initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><VolunteerActivismIcon fontSize='large' color='inherit'/> 40+</Typography><Typography color='inherit'>HEALED HEARTS</Typography></motion.div></Grid>
+                        <Grid item md={3} xs={6}><motion.div initial={animationVariants.hidden} animate={inView ? animationVariants.visible : animationVariants.hidden} style={{display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'flex-start', color:'#800020'}}><Typography fontSize={{md:30, xs:20}} color={'inherit'} fontWeight={'bold'} lineHeight={1}><MoneyOffIcon fontSize='large' color='inherit'/> 100+</Typography><Typography color='inherit'>H PRO-BONO</Typography></motion.div></Grid>
+                    </Grid>
+                </Card>
         </Grid>
         <Grid container flexDirection='column' alignItems='center' mt={{xs:5, md:15}}>
             <Grid item>
@@ -202,7 +204,7 @@ function Home() {
                     <motion.div ref={ourPracticeSectionRef} initial={ourPracticeSection.hidden} animate={ourPracticeSectionInView ? ourPracticeSection.visible : ourPracticeSection.hidden}><Typography color='#2F3345' fontSize={{md:30, xs:20}} fontWeight='bold'>A  Better  Tomorrow  Starts  Here</Typography></motion.div>
                 </Grid>
                 <Grid item mt={{xs:4, md:10}} px={{md:50}}>
-                    <motion.div ref={ourPracticeSectionRef} initial={ourPracticeSection.hidden} animate={ourPracticeSectionInView ? ourPracticeSection.visible : ourPracticeSection.hidden}><Typography color='#2F3345' fontSize={{xs:20}}>Community Development System, Inc. is a private practice that provides mental health services to individuals, families, and groups. We ofer a variety of evidence-based therapies, including CBT, to help you achieve your mental health goals.</Typography></motion.div>
+                    <motion.div ref={ourPracticeSectionRef} initial={ourPracticeSection.hidden} animate={ourPracticeSectionInView ? ourPracticeSection.visible : ourPracticeSection.hidden}><Typography color='#2F3345' fontSize={{xs:20}}>Community Development System, Inc. is a private practice that provides mental health services to individuals, families, and groups. We ofer a variety of evidence-based therapies, including CBT (Cognitive Behavioral therapy), to help you achieve your mental health goals.</Typography></motion.div>
                 </Grid>
             </Grid>
         </Grid>
@@ -279,10 +281,10 @@ function Home() {
             </Grid>
         </Grid>
         <motion.div ref={freeConsultationSectionRef} initial={freeConsultationSection.hidden} animate={freeConsultationSectionInView ? freeConsultationSection.visible : freeConsultationSection.hidden}>
-            <Grid container md={12} justifyContent='center' sx={{backgroundColor:'#E0E6FB'}}>
+            <Grid container md={12} justifyContent='center' sx={{backgroundColor:'#E0E6FB', borderRadius:6}}>
                 <Grid container md={7} direction='column' justifyContent='center' rowGap={6} sx={{p:{md:12, xs:5}}}>
                     <Grid item alignSelf='center'><Typography color='#202332' fontSize={{md:40, xs:20}} fontWeight='bold'>Don't Let Your Mental Health Hold You Back</Typography></Grid>
-                    <Grid item><Button sx={{backgroundColor:'#282D40', fontWeight:'bold', color:'#FFF', borderRadius:100, p:2}}>Get Free Consultation</Button></Grid>
+                    <Grid item><Button sx={{backgroundColor:'#282D40', fontWeight:'bold', color:'#FFF', borderRadius:100, p:2, border:'1px solid #282D40', '&:hover':{color:'#282D40', border:'1px solid #282D40'}}}>Get Free Consultation</Button></Grid>
                 </Grid>
                 <Grid item md={5} xs={12}><img src={computerLady} style={{width:'100%'}}/></Grid>
             </Grid>

@@ -3,7 +3,7 @@ import { Box, Divider, Grid, Typography } from '@mui/material'
 
 function Footer() {
   return (
-    <Box justifyContent={'space-between'} alignItems={'center'} display='flex' direction='column' sx={{backgroundColor:'#171921', height:40, pt:.5, pb:.7, px:2}}>
+    <Box justifyContent={'space-between'} alignItems={'center'} display='flex' direction='column' sx={{backgroundColor:'#171921', height:40, pt:.5, pb:.7, px:1}}>
         <Typography variant='p' fontSize={{xs:10, md:15}} color='#FFF'>Copyright© Community Development System, Inc</Typography>
         <Divider orientation='vertical' variant='middle' sx={{height:'60%', backgroundColor:'#FFF', display:{md:'none'}}}/>
         <Box display={'flex'} flexDirection={'column'}>

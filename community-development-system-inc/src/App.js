@@ -21,7 +21,7 @@ function App() {
   // const { ref: myRef, inView, entry } = useInView()
 
   return (
-    <div style={{overflowX:'hidden'}}><BrowserRouter>
+    <div style={{overflowX:'hidden', minHeight:'100vh'}}><BrowserRouter>
       <Box sx={{display:{md:'flex', xs:'none'}}}>
         <WaveLine />
       </Box>
