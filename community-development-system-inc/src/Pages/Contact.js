@@ -192,7 +192,7 @@ function Contact() {
                     <Grid item ><Typography>Monday - Friday</Typography></Grid>
                     <Grid item ><Typography>8:30am - 5:30pm</Typography></Grid>
                   </Grid>
-                    <Grid item><Button sx={{backgroundColor:'#282D40', fontWeight:'bold', color:'#FFF', borderRadius:100, p:2, border:'1px solid #282D40', '&:hover':{color:'#282D40', border:'1px solid #282D40'}}}>Get Free Consultation</Button></Grid>
+                    {/* <Grid item><Button sx={{backgroundColor:'#282D40', fontWeight:'bold', color:'#FFF', borderRadius:100, p:2, border:'1px solid #282D40', '&:hover':{color:'#282D40', border:'1px solid #282D40'}}}>Get Free Consultation</Button></Grid> */}
                 </Grid>
                 <Grid item md={5} xs={12} display='flex' alignItems='center' justifyContent='center'><img src={computerLady} style={{width:'100%', borderRadius:6}}/></Grid>
             </Grid>
