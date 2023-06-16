@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, Button, FormControl, FormControlLabel, FormLabel, Grid, Modal, Radio, RadioGroup, TextField, Typography }from '@mui/material'
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
+import CloseIcon from '@mui/icons-material/Close'
 import { motion } from 'framer-motion'
 import dayjs from 'dayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers'
@@ -20,7 +20,23 @@ const style = {
   boxShadow: 24,
   p: 4,
   overflowY:'auto',
-  maxHeight:'80vh'
+  maxHeight:'80vh',
+  my:1
+}
+
+const style2 = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: {md:400, xs:'80%'},
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  overflowY:'auto',
+  maxHeight:'80vh',
+  my:1
 }
 
 const textFieldStyle = {'& .MuiOutlinedInput-root': {
@@ -44,38 +60,12 @@ const textFieldStyle = {'& .MuiOutlinedInput-root': {
     color:'#800020',
   }}
 
-  const DateTimePickerExample = ({props}) => {
-    
-    const [dateValue, setDateValue] = React.useState(dayjs(null))
-    const [ dateValueError, setDateValueError ] = useState(false)
-    const { setSelectedDate, selectedDate } = props
-  
-    const handleDateChange = (date) => {
-      setSelectedDate(date)
-    }
-  
-    return (
-        <LocalizationProvider dateAdapter={AdapterDayjs} >
-            <Box sx={{display:{xs:'none', md:'flex'}}}><DesktopDatePicker
-            label="Date"
-            inputFormat="MM/DD/YYYY"
-            value={selectedDate}
-            onChange={handleDateChange}
-            renderInput={(params) => <TextField fullWidth InputLabelProps={{style : {color : '#282D40'} }} id='desktop-date-picker' {...params} sx={textFieldStyle}/>}
-            /></Box>
-            <Box sx={{ flexGrow: 1, display: {xs:'flex',md:'none'}}}><MobileDatePicker
-            label="DATE"
-            inputFormat="MM/DD/YYYY"
-            value={selectedDate}
-            onChange={handleDateChange}
-            renderInput={(params) => <TextField fullWidth InputLabelProps={{style : {color : 'darkgray'} }} id='mobile-date-picker' {...params} sx={textFieldStyle}/>}
-            /></Box>
-    </LocalizationProvider>
-    )
-  }
+export default function AppointmentModal(props) {
 
-export default function BasicModal() {
-    const [open, setOpen] = useState(true)
+    const [openTime, setOpenTime] = useState(false)
+    const handleCloseTime = () => setOpenTime(false)
+
+    const [open, setOpen] = useState(false)
     const handleOpen = () => setOpen(true)
     const handleClose = () => setOpen(false)
 
@@ -89,10 +79,12 @@ export default function BasicModal() {
     const [ phoneError, setPhoneError ] = useState()
     const [ message, setMessage ] = useState()
     const [ appointmentReason, setAppointmentReason ] = useState('I am going through a difficult time')
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null)
+    const [ time, setTime ] = useState(null)
 
     const handleDateChange = (date) => {
       setSelectedDate(date)
+      setOpenTime(true)
     };
 
     const formSubmitHandler = (e) => {
@@ -108,16 +100,24 @@ export default function BasicModal() {
         }
     }
 
+    useEffect(() => {
+      console.log(time)
+    }, [time])
+
     return (
         <div>
-        <Button onClick={handleOpen} sx={{ display:{md:'flex', xs:'none'}, border:'3px solid #2F3345', color:'#2F3345', backgroundColor:'transparent', borderRadius:100, cursor:'pointer', padding:1, fontSize:15, alignItems:'center'}}><CalendarMonthIcon sx={{paddingRight:1}}/>Book an Appointment</Button>
+        
+        <Button onClick={handleOpen} sx={{}}>{props.children}</Button>
         <Modal
             open={open}
             onClose={handleClose}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
+            <Box sx={style}><SelectTimeModal props={{openTime, setOpenTime, handleCloseTime, setTime, selectedDate, setSelectedDate}}/>
+              <Grid container xs={12} justifyContent='flex-end'>
+                <Button onClick={handleClose}><CloseIcon fontSize='large' sx={{color:'#800020'}}/></Button>
+              </Grid>
                 <Typography fontSize={25} fontWeight={600} mb={3}>Book an Appointment</Typography>
             <Grid item xs={12} md={12}>
                 <motion.form initial={{x:'-100vw'}} animate={{x:1}} transition={{duration:2}} onSubmit={(e) => formSubmitHandler(e)}>
@@ -134,7 +134,6 @@ export default function BasicModal() {
             value={selectedDate}
             onChange={handleDateChange}
             sx={{...textFieldStyle}}
-            // renderInput={(params) => <TextField fullWidth InputLabelProps={{style : {color : '#282D40'} }} id='desktop-date-picker' {...params} />}
             /></Box>
             <Box sx={{ flexGrow: 1, display: {xs:'flex',md:'none'}}}><MobileDatePicker
             slotProps={{ textField: { fullWidth: true } }}
@@ -173,4 +172,45 @@ export default function BasicModal() {
         </Modal>
         </div>
     );
+}
+
+const SelectTimeModal = ({props}) => {
+
+  const { openTime, setOpenTime, setTime, selectedDate, setSelectedDate } = props
+
+  const handleCloseTime =  () => {
+    setOpenTime(false)
+  }
+
+  return(
+    <Modal open={openTime} onClose={handleCloseTime}>
+      <Box sx={style2}>
+        <Grid container justifyContent='flex-end'>
+          <Button onClick={handleCloseTime}><CloseIcon color='#800020' fontSize='large'/></Button>
+        </Grid>
+        <Typography>Select a Time...</Typography>
+        <Grid container spacing={2}>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => {setSelectedDate(dayjs(new Date(selectedDate).setHours(12, 30))); handleCloseTime()}}><Typography>8:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>9:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>9:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>10:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>10:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>11:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>11:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>12:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>12:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>1:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>1:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>2:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>2:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>3:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>3:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>4:00</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>4:30</Typography></Button></Grid>
+          <Grid item xs={4}><Button fullWidth variant='contained' onClick={() => setTime()}><Typography>5:00</Typography></Button></Grid>
+        </Grid>
+      </Box>
+    </Modal>
+    
+  )
 }

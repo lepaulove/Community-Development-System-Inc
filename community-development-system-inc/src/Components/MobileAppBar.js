@@ -7,7 +7,6 @@ import MedicalInformationIcon from '@mui/icons-material/MedicalInformation'
 import CallIcon from '@mui/icons-material/Call'
 import Diversity1Icon from '@mui/icons-material/Diversity1'
 import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import { Link } from 'react-router-dom'
 function MobileAppBar() {
 
@@ -17,17 +16,12 @@ function MobileAppBar() {
         setDrawerState(!drawerState)
     }
 
-    const { ref, inView } = useInView()
-
     const animationVariants = {
         hidden: {
           x:'-100vw'
         },
         visible: {
           x: 1,
-        //   transition: {
-        //     duration: .5,
-        //   },
         },
       }
 
@@ -58,45 +52,45 @@ function MobileAppBar() {
                     <List>
                         <motion.div initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duration: 0.5, delay: 0.0}}>
                             <ListItem>
-                                <Link to='' style={{textDecoration:'none', color:'#2F3345'}}>
+                                <Link to='' style={{textDecoration:'none', color:'#2F3345', width:'100%'}}>
                                     <ListItemButton>
                                         <HomeIcon sx={{pr:1.5}}/><Typography>HOME</Typography>
                                     </ListItemButton>
                                 </Link>
                             </ListItem>
                         </motion.div>
-                        <motion.div  initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.2}}>
+                        <motion.div initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.2}}>
                             <ListItem>
-                                <Link to='/about' style={{textDecoration:'none', color:'#2F3345'}}>
+                                <Link to='/about' style={{textDecoration:'none', color:'#2F3345', width:'100%'}}>
                                     <ListItemButton>
                                         <InfoIcon sx={{pr:1.5}}/><Typography>ABOUT</Typography>
                                     </ListItemButton>
                                 </Link>
                             </ListItem>
                         </motion.div>
-                        <motion.div  initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.3}}>
+                        <motion.div initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.3}}>
                             <ListItem>
-                                <Link to='/services' style={{textDecoration:'none', color:'#2F3345'}}>
+                                <Link to='/services' style={{textDecoration:'none', color:'#2F3345', width:'100%'}}>
                                     <ListItemButton>
                                         <MedicalInformationIcon sx={{pr:1.5}}/><Typography>SERVICES</Typography>
                                     </ListItemButton>
                                 </Link>
                             </ListItem>
                         </motion.div>
-                        <motion.div  initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.4}}>
+                        <motion.div initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.4}}>
                             <ListItem>
-                                <Link to='/contact' style={{textDecoration:'none', color:'#2F3345'}}>
+                                <Link to='/resources' style={{textDecoration:'none', color:'#2F3345', width:'100%'}}>
                                     <ListItemButton>
-                                        <CallIcon sx={{pr:1.5}}/><Typography>CONTACT</Typography>
+                                        <Diversity1Icon sx={{pr:1.5}}/><Typography>RESOURCES</Typography>
                                     </ListItemButton>
                                 </Link>
                             </ListItem>
                         </motion.div>
-                        <motion.div  initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.5}}>
+                        <motion.div initial={animationVariants.hidden} animate={drawerState ? animationVariants.visible : animationVariants.hidden} transition={{duraton: 0.5, delay: 0.5}}>
                             <ListItem>
-                                <Link to='/resources' style={{textDecoration:'none', color:'#2F3345'}}>
+                                <Link to='/contact' style={{textDecoration:'none', color:'#2F3345', width:'100%'}}>
                                     <ListItemButton>
-                                        <Diversity1Icon sx={{pr:1.5}}/><Typography>RESOURCES</Typography>
+                                        <CallIcon sx={{pr:1.5}}/><Typography>CONTACT</Typography>
                                     </ListItemButton>
                                 </Link>
                             </ListItem>

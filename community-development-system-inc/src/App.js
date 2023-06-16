@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useEffect } from 'react'
 
 import logo from './logo.svg'
 import './App.css'
@@ -12,23 +12,31 @@ import Contact from './Pages/Contact'
 import Services from './Pages/Services'
 import Resources from './Pages/Resources'
 import { Box } from '@mui/material'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import Footer from './Components/Footer'
+
+export function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 function App() {
 
-  
-  // const { ref: myRef, inView, entry } = useInView()
-
   return (
-    <div style={{overflowX:'hidden', minHeight:'100vh'}}><BrowserRouter>
+    <div style={{overflowX:'hidden'}}><BrowserRouter>
+      <ScrollToTop />
       <Box sx={{display:{md:'flex', xs:'none'}}}>
         <WaveLine />
       </Box>
       <Box sx={{display:{md:'none', xs:'flex'}}}>
         <WaveLineMobile />
       </Box>
-      <Box sx={{py:{md:5, xs:2}, mx:{md:10, xs:2.5}}}>
+      <Box sx={{py:{md:5, xs:2}, mx:{md:'175px', xs:1.5}, minHeight:'100vh'}}>
         <Header />
         
         <Routes>
@@ -38,9 +46,6 @@ function App() {
           <Route exact path='/services' element={<Services />} />
           <Route exact path='/resources' element={<Resources />} />
         </Routes>
-        
-        
-        {/* <Home /> */}
       </Box>
       <Footer />
     </BrowserRouter></div>
@@ -48,3 +53,13 @@ function App() {
 }
 
 export default App;
+
+export const colorPalette = {
+  primary: '#326078',
+  secondary: '#2F3345',
+  callToAction:'#C43932',
+  accent: '#F3AE2D',
+  white: '#FFF',
+  black: '#000',
+
+}

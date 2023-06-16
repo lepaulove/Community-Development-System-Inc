@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { Box, Button, createTheme, Divider, FormControl, Grid, InputLabel, MenuItem, Select, ThemeProvider, Typography } from '@mui/material'
 import AddResourceModal from '../Components/AddResourceModal'
 import ResourceCard from '../Components/ResourceCard'
-import { collection, getDocs, getFirestore } from 'firebase/firestore'
 import { firestore } from '../Firebase/utils'
 import { useCollection } from 'react-firebase-hooks/firestore'
+import { colorPalette } from '../App'
 
 const theme = createTheme({
     palette:{
@@ -15,8 +15,6 @@ const theme = createTheme({
 })
 
 function Resources() {
-
-    // const [resources, setResources] = useState([])
     const [category, setCategory] = useState('Show All')
     const [AddResourceModalOpen, setAddResourceModalOpen] = useState(false)
     const categories = ['Show All', 'Crisis & Warm Support', 'Covid-19', 'Domestic Violence', 'Sexual Assault', 'LGBTQ+', 'Substance Abuse', 'Veterans', 'Families', 'EDOs', 'Necessities', 'Other']
@@ -29,12 +27,6 @@ function Resources() {
     
     const handleAddResourceModalClose = () => {
         setAddResourceModalOpen(false)
-    }
-
-    const db = getFirestore()
-
-    const fetchAllResources = async () => {
-        
     }
 
     useEffect(() => {
@@ -57,7 +49,7 @@ function Resources() {
                     </Grid>
                     <Grid item xs={11.5} mb={3} sx={{width:'100%'}}>
                         <FormControl fullWidth>
-                            <InputLabel id="select-label" sx={{color: '#36BAFE', width:'100%', '&.Mui-focused': {color:'#36BAFE'} }}>CATEGORY</InputLabel>
+                            <InputLabel id="select-label" sx={{color: colorPalette.primary, fontWeight:700, width:'100%', '&.Mui-focused': {color:colorPalette.primary} }}>CATEGORY</InputLabel>
                             <Select
                             fullWidth
                             labelId="select-label"
@@ -67,18 +59,19 @@ function Resources() {
                             onChange={handleChange}
                             size='large'
                             sx={{textAlign:'center',
-                            color: "#36BAFE",
+                            color: colorPalette.primary,
+                            fontWeight:700,
                             '.MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#36BAFE',
+                            borderColor: colorPalette.callToAction,
                             },
                             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#36BAFE',
+                            borderColor: colorPalette.callToAction,
                             },
                             '&:hover .MuiOutlinedInput-notchedOutline': {
-                            borderColor: '#36BAFE',
+                            borderColor: colorPalette.callToAction,
                             },
                             '.MuiSvgIcon-root ': {
-                            fill: "#36BAFE !important",
+                            fill:`${colorPalette.callToAction} !important`,
                             }
                             }}
                             >
@@ -90,11 +83,6 @@ function Resources() {
                     </Grid>
                     <Grid xs={11.5} item container justifyContent='space-around' spacing={4}>
                     {resources?.docs.filter( i => {return category === 'Show All' ? i?.data() : i?.data().category === category}).map((item, index) => {
-                    // if( userProfileData){
-                    //     return(
-                    //     <ResourceCard key={index} title={item.data().focus} description={item.data().details} contactList={item.data().contacts} admin={userProfileData.userRoles[0] === 'admin'} item={item.id}/>
-                    //     )
-                    // }
                     return(
                         <ResourceCard key={index} title={item?.data().focus} description={item?.data().details} contactList={item?.data().contacts} admin={false} item={item.id}/>
                     )
